@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2599949183418680495
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2599949183418680494}
+  - component: {fileID: 2599949183418680493}
+  m_Layer: 0
+  m_Name: _PrefabBank
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2599949183418680494
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2599949183418680495}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2599949183418680493
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2599949183418680495}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83f237ce41bbb164b82e470a3735e894, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GamePrefab: {fileID: 8515402882644738336, guid: 66ba1bed960e1fe478586047f7bb519c,
+    type: 3}
+  GreenCube: {fileID: 734777158932590545, guid: f4681f16670137543afcecf201647a95,
+    type: 3}
+  Apple: {fileID: 8048775624594048530, guid: 6f0a08b5f0ade954aa83539c99976916, type: 3}
+  SnakeBodyPart: {fileID: 7050574538828673829, guid: 02f64b44b74e2a644a828aada5af83ef,
+    type: 3}
+  TreeLog: {fileID: 561574141189375372, guid: a7e6645f6f3a948488511ddf2e419ba7, type: 3}
+  ForwardArrow: {fileID: 3035709416203445470, guid: d9c729ea4cedd934c88f9a1454200573,
+    type: 3}
+  BackArrow: {fileID: 2189322421842436851, guid: d6a414348306c2845a206dceb654493e,
+    type: 3}
+  LeftArrow: {fileID: 2789800292573434803, guid: 75b27aa921a638348a639b004c1acaee,
+    type: 3}
+  RightArrow: {fileID: 2601898363591431048, guid: f50ae78cfa8a59440a90f5ebeda8b6f8,
+    type: 3}
