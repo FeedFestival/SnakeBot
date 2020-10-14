@@ -60,7 +60,7 @@ public class Pathfinding
         }
     }
 
-    public List<PathNode> FindPath(int startX, int startY, int endX, int endY)
+    public List<PathNode> FindPath(int startX, int startY, int endX, int endY, bool reverse = true)
     {
         PathNode startNode = grid.GetGridObject(startX, startY);
         PathNode endNode = grid.GetGridObject(endX, endY);
@@ -104,9 +104,9 @@ public class Pathfinding
                 if (PathfindingDebugStepVisual.Instance != null)
                 {
                     PathfindingDebugStepVisual.Instance.TakeSnapshot(grid, currentNode, openList, closedList);
-                    PathfindingDebugStepVisual.Instance.TakeSnapshotFinalPath(grid, CalculatePath(endNode));
+                    PathfindingDebugStepVisual.Instance.TakeSnapshotFinalPath(grid, CalculatePath(endNode, reverse));
                 }
-                return CalculatePath(endNode);
+                return CalculatePath(endNode, reverse);
             }
 
             openList.Remove(currentNode);
@@ -197,12 +197,29 @@ public class Pathfinding
         }
     }
 
+    public int GetWalkableCount()
+    {
+        int count = 0;
+        for (var x = 0; x < grid.GetWidth(); x++)
+        {
+            for (var y = 0; y < grid.GetHeight(); y++)
+            {
+                if (grid.GetGridObject(x, y).isWalkable)
+                {
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+
     public void SetSomeIsWalkable(List<Vector2Int> positions, bool value)
     {
         foreach (Vector2Int pos in positions)
         {
             PathNode pNode = GetNode(pos.x, pos.y);
-            if (pNode == null) {
+            if (pNode == null)
+            {
                 Debug.LogWarning("pNode " + pos.ToString() + " Can't be found");
                 break;
             }
@@ -210,7 +227,17 @@ public class Pathfinding
         }
     }
 
-    private List<PathNode> CalculatePath(PathNode endNode)
+    public void SetIsWalkable(Vector2Int pos, bool value)
+    {
+        PathNode pNode = GetNode(pos.x, pos.y);
+        if (pNode == null)
+        {
+            Debug.LogWarning("pNode " + pos.ToString() + " Can't be found");
+        }
+        pNode.SetIsWalkable(value);
+    }
+
+    private List<PathNode> CalculatePath(PathNode endNode, bool reverse = true)
     {
         List<PathNode> path = new List<PathNode>();
         path.Add(endNode);
@@ -220,7 +247,10 @@ public class Pathfinding
             path.Add(currentNode.cameFromNode);
             currentNode = currentNode.cameFromNode;
         }
-        path.Reverse();
+        if (reverse)
+        {
+            path.Reverse();
+        }
         return path;
     }
 

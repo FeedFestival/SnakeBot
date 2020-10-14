@@ -22,6 +22,7 @@ public class UIController : MonoBehaviour
 
     public void Init()
     {
+        DialogController.gameObject.SetActive(true);
         DialogController.ShowDialog(false);
         TransitionOverlay(show: false, instant: true);
     }

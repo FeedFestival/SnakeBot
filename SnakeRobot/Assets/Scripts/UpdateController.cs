@@ -33,5 +33,23 @@ public class UpdateController : MonoBehaviour
         {
             Game._.LevelController.MapMaker.CreateApple();
         }
+
+        if (Input.GetKeyUp(KeyCode.Alpha1) || Input.GetKeyUp(KeyCode.Keypad1))
+        {
+            Game._.LevelController.MapMaker.CreateStartingCube();
+            Game._.LevelController.MapMaker.CreateEndCube();
+        }
+        if (Input.GetKeyUp(KeyCode.Alpha2) || Input.GetKeyUp(KeyCode.Keypad2))
+        {
+            Game._.LevelController.MapMaker.CreateHoles();
+        }
+        if (Input.GetKeyUp(KeyCode.Alpha3) || Input.GetKeyUp(KeyCode.Keypad3))
+        {
+            Game._.LevelController.MapMaker.CreateApples();
+        }
+        if (Input.GetKeyUp(KeyCode.Alpha4) || Input.GetKeyUp(KeyCode.Keypad4))
+        {
+            Game._.LevelController.StartGame();
+        }
     }
 }

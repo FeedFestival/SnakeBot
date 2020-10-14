@@ -107,13 +107,13 @@ public class MovesController : MonoBehaviour
         switch (moveDirection)
         {
             case MoveDirection.Forward:
-                return new Vector2Int(1, 0);
-            case MoveDirection.Back:
-                return new Vector2Int(-1, 0);
-            case MoveDirection.Left:
-                return new Vector2Int(0, -1);
-            default:
                 return new Vector2Int(0, 1);
+            case MoveDirection.Back:
+                return new Vector2Int(0, -1);
+            case MoveDirection.Left:
+                return new Vector2Int(-1, 0);
+            default:
+                return new Vector2Int(1, 0);
         }
     }
 

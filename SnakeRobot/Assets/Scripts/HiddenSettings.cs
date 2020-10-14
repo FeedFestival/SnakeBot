@@ -28,4 +28,10 @@ public class HiddenSettings : MonoBehaviour
     public Color BlueColor;
     public Color YellowColor;
     public Color LightBlueColor;
+
+    [Header("Iterations Crash")]
+    public int MaxPathTryCrash;
+    public int MaxApplesTryCrash;
+    public int ApplesPointsCrash;
+    public int MaxPointsTryCrash;
 }

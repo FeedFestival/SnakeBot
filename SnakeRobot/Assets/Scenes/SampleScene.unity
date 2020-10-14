@@ -217,12 +217,13 @@ MonoBehaviour:
   DebugThis: 1
   LevelName: SampleScene
   GameplayState: 0
+  DebugPerKeys: 0
   RandomLevel: 1
-  X: 7
-  Y: 7
+  Size: {x: 8, y: 8}
   ApplesCount: 1
-  StartAtX: 1
-  EndAtX: 1
+  StartAtX: 2
+  EndAtX: 6
+  HolesRatio: 44
   MapMaker: {fileID: 2060016637}
 --- !u!1 &373447755
 GameObject:
@@ -575,7 +576,10 @@ MonoBehaviour:
   MapCubeStart: {fileID: 0}
   Apples: []
   EnergyTillEnd: 0
-  DebugThis: 1
+  DebugThis: 0
+  DebugApples: 0
+  DebugPathfinding: 1
+  _holes: []
 --- !u!1001 &1162449757606772211
 PrefabInstance:
   m_ObjectHideFlags: 0

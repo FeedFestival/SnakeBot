@@ -9,12 +9,13 @@ public class LevelController : MonoBehaviour
     public string LevelName;
     [SerializeField]
     public GameplayState GameplayState;
+    public bool DebugPerKeys;
     public bool RandomLevel;
-    public int X;   // max 10
-    public int Y;   // max 10
+    public Vector2Int Size;
     public int ApplesCount;
     public int StartAtX;
     public int EndAtX;
+    public float HolesRatio;
     public MapCube[,] MapCubes;
     private IEnumerator _playCo;
     public MapMaker MapMaker;
@@ -30,11 +31,18 @@ public class LevelController : MonoBehaviour
             MapMaker.InitValues(DebugThis);
         }
         MapCubes = MapMaker.CreateMap();
-        MapMaker.CreateStartingCube();
-        MapMaker.CreateEndCube();
-        MapMaker.CreateHoles();
-        MapMaker.CreateApples();
+        if (DebugPerKeys == false)
+        {
+            MapMaker.CreateStartingCube();
+            MapMaker.CreateEndCube();
+            MapMaker.CreateHoles();
+            MapMaker.CreateApples();
+            StartGame();
+        }
+    }
 
+    public void StartGame()
+    {
         if (Game._.Snake.gameObject.activeSelf == false)
         {
             Game._.Snake.gameObject.SetActive(true);
@@ -46,7 +54,7 @@ public class LevelController : MonoBehaviour
     {
         var x = Game._.Snake.SnakeHeadPos.x + to.x;
         var y = Game._.Snake.SnakeHeadPos.y + to.y;
-        if (y == Y || x == X || y < 0 || x < 0)
+        if (y == Size.y || x == Size.x || y < 0 || x < 0)
         {
             if (Game._.Snake.SnakeIsOnEndCube)
             {
@@ -59,7 +67,7 @@ public class LevelController : MonoBehaviour
                 return null;
             }
         }
-        return MapCubes[y, x];
+        return MapCubes[x, y];
     }
 
     private bool MoveSnake(Vector2Int to, Vector2Int next)
@@ -76,7 +84,7 @@ public class LevelController : MonoBehaviour
         {
             var futureY = Game._.Snake.SnakeHeadPos.y + to.y;
             var futureX = Game._.Snake.SnakeHeadPos.x + to.x;
-            if (futureY == (Y - 1) || futureX == (X - 1)
+            if (futureY == (Size.y - 1) || futureX == (Size.x - 1)
                 || futureY == 0 || futureX == 0)
             {
                 // End of the Line
@@ -85,7 +93,7 @@ public class LevelController : MonoBehaviour
             {
                 var nextY = futureY + next.y;
                 var nextX = futureX + next.x;
-                bodyPartMove.NextMapCube = MapCubes[nextY, nextX];
+                bodyPartMove.NextMapCube = MapCubes[nextX, nextY];
             }
         }
         Game._.Snake.MoveSnake(bodyPartMove);
@@ -109,11 +117,12 @@ public class LevelController : MonoBehaviour
         var nextIndex = Game._.Snake.SnakeHeadIndex + 1;
         Vector2Int nextMoveDirection;
         bool didSnakeMove = false;
-        if (UIController._.MovesController.MoveDirections.Count > nextIndex)
+        if (UIController._.MovesController.MoveDirections.Count <= nextIndex)
         {
-            nextMoveDirection = UIController._.MovesController.MoveDirections[nextIndex];
-            didSnakeMove = MoveSnake(moveDirection, nextMoveDirection);
+            nextIndex = UIController._.MovesController.MoveDirections.Count - 1;
         }
+        nextMoveDirection = UIController._.MovesController.MoveDirections[nextIndex];
+        didSnakeMove = MoveSnake(moveDirection, nextMoveDirection);
 
         Game._.Snake.SnakeHeadIndex++;
         return didSnakeMove;

@@ -11,13 +11,14 @@ public class MapCube : MonoBehaviour
     public bool IsEnd;
     private string _indexQue;
     public GameObject Obj;
+    public bool IsWalkable;
 
     public void Init(Vector2Int pos, bool debugThis)
     {
         Pos = pos;
         if (debugThis)
         {
-            TextMesh.text = Pos.y + "" + Pos.x;
+            TextMesh.text = Pos.x + "" + Pos.y;
         }
         else
         {
@@ -27,6 +28,7 @@ public class MapCube : MonoBehaviour
         IndexTextMesh.gameObject.SetActive(false);
         _indexQue = "";
         EnergyTextMesh.gameObject.SetActive(false);
+        IsWalkable = true;
     }
 
     public void ShowIndex(int index)
@@ -67,14 +69,15 @@ public class MapCube : MonoBehaviour
         }
     }
 
-    public void ShowObj(bool value)
+    public void SetWalkable(bool value)
     {
-        Obj.SetActive(false);
+        Obj.SetActive(value);
+        IsWalkable = value;
     }
 
     public override string ToString()
     {
-        return Pos.y + ", " + Pos.x + (IsEnd ? " - End" : "");
+        return Pos.x + ", " + Pos.y + (IsEnd ? " - End" : "");
     }
 }
 

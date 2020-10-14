@@ -53,3 +53,7 @@ MonoBehaviour:
   BlueColor: {r: 0.1782218, g: 0.5215958, b: 0.8396226, a: 1}
   YellowColor: {r: 1, g: 0.96688867, b: 0.15566039, a: 1}
   LightBlueColor: {r: 0.3927999, g: 0.8844403, b: 0.9150943, a: 1}
+  MaxPathTryCrash: 100
+  MaxApplesTryCrash: 100
+  ApplesPointsCrash: 100
+  MaxPointsTryCrash: 100

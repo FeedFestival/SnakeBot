@@ -27,7 +27,6 @@ public class Snake : MonoBehaviour
     private void PlaceSnake(MapCube toMapCube)
     {
         Game._.Snake.SnakeHead.transform.position = toMapCube.transform.position;
-        // Game._.Snake.SnakeHeadPos = new Vector2Int(toMapCube.Y, toMapCube.X);
         Game._.Snake.SnakeHeadPos = toMapCube.Pos;
     }
 
@@ -111,7 +110,6 @@ public class Snake : MonoBehaviour
         moveCopy.Position = bodyPart.transform.position;
         bodyPart.transform.position = move.ToMapCube.transform.position;
 
-        //  new Vector2Int(move.ToMapCube.Y, move.ToMapCube.X);
         SnakeHeadPos = move.ToMapCube.Pos;
 
         moveCopy.MoveDirection = bodyPart.MoveDirection;
@@ -122,11 +120,11 @@ public class Snake : MonoBehaviour
         {
             case MoveDirection.Forward:
                 bodyPart.transform.eulerAngles = new Vector3(0, 0, 0);
-                if (move.NextY == 1)
+                if (move.Next.y == 1)
                 {
                     bodyPart.SetOndulation(Ondulation.Keep);
                 }
-                else if (move.NextX == 1)
+                else if (move.Next.x == 1)
                 {
                     bodyPart.SetOndulation(Ondulation.Right);
                 }
@@ -137,11 +135,11 @@ public class Snake : MonoBehaviour
                 break;
             case MoveDirection.Left:
                 bodyPart.transform.eulerAngles = new Vector3(0, -90, 0);
-                if (move.NextX == -1)
+                if (move.Next.x == -1)
                 {
                     bodyPart.SetOndulation(Ondulation.Keep);
                 }
-                else if (move.NextY == 1)
+                else if (move.Next.y == 1)
                 {
                     bodyPart.SetOndulation(Ondulation.Right);
                 }
@@ -152,11 +150,11 @@ public class Snake : MonoBehaviour
                 break;
             case MoveDirection.Right:
                 bodyPart.transform.eulerAngles = new Vector3(0, 90, 0);
-                if (move.NextX == 1)
+                if (move.Next.x == 1)
                 {
                     bodyPart.SetOndulation(Ondulation.Keep);
                 }
-                else if (move.NextY == 1)
+                else if (move.Next.y == 1)
                 {
                     bodyPart.SetOndulation(Ondulation.Left);
                 }
@@ -167,11 +165,11 @@ public class Snake : MonoBehaviour
                 break;
             default:    // Back
                 bodyPart.transform.eulerAngles = new Vector3(0, 180, 0);
-                if (move.NextY == -1)
+                if (move.Next.y == -1)
                 {
                     bodyPart.SetOndulation(Ondulation.Keep);
                 }
-                else if (move.NextX == 1)
+                else if (move.Next.x == 1)
                 {
                     bodyPart.SetOndulation(Ondulation.Left);
                 }
@@ -241,15 +239,15 @@ public class Snake : MonoBehaviour
 
     private MoveDirection GetHeadDirection(Move move)
     {
-        if (move.X == 0 && move.Y == 1)
+        if (move.Pos.x == 0 && move.Pos.y == 1)
         {
             return MoveDirection.Forward;
         }
-        else if (move.X == -1 && move.Y == 0)
+        else if (move.Pos.x == -1 && move.Pos.y == 0)
         {
             return MoveDirection.Left;
         }
-        else if (move.X == 1 && move.Y == 0)
+        else if (move.Pos.x == 1 && move.Pos.y == 0)
         {
             return MoveDirection.Right;
         }
@@ -262,28 +260,24 @@ public class Snake : MonoBehaviour
 
 public class Move
 {
-    public int Y;
-    public int X;
-    public int NextY;
-    public int NextX;
+    public Vector2Int Pos;
+    public Vector2Int Next;
     public MapCube ToMapCube;
     public MapCube NextMapCube;
     public PartOfBody PartOfBody;
 
     public Move(Vector2Int to, Vector2Int next)
     {
-        Y = to.y;
-        X = to.x;
+        Pos = to;
         if (next != null)
         {
-            NextY = next.y;
-            NextX = next.x;
+            Next = next;
         }
     }
 
     public bool SameCoordinate(Move move)
     {
-        return (move.X == X) && (move.Y == Y);
+        return (move.Pos.x == Pos.x) && (move.Pos.y == Pos.y);
     }
 }
 
